@@ -1,8 +1,20 @@
-def create_prompt_with_tulu_chat_format(messages, bos="<s>", eos="</s>", add_bos=True):
+def create_prompt(messages, bos="<|im_start|>", eos="<|im_end|> ",add_bos=True):
     formatted_text = ""
     for message in messages:
         if message["role"] == "system":
-            formatted_text += "<|system|>\n" + message["content"] + "\n"
+            formatted_text += bos + message["content"] + eos + "\n"
+        elif message["role"] ==  "user":
+            formatted_text += bos + message["content"] + eos + "\n"
+        elif message["role"] == "assistant":
+            formatted_text += bos +  message["content"] + eos + "\n"
+
+    return formatted_text.strip()
+
+def create_prompt_with_tulu_chat_format(messages):
+    formatted_text = ""
+    for message in messages:
+        if message["role"] == "system":
+            formatted_text += "system\n" + message["content"] + "\n"
         elif message["role"] == "user":
             formatted_text += "<|user|>\n" + message["content"] + "\n"
         elif message["role"] == "assistant":

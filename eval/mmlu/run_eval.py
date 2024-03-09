@@ -160,7 +160,7 @@ def main(args):
     subjects = sorted(
         [
             f.split("_test.csv")[0]
-            for f in os.listdir(os.path.join(args.data_dir, "test"))
+            for f in os.listdir(os.path.join(args.data_dir))
             if "_test.csv" in f
         ]
     )
